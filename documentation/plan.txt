@@ -1,0 +1,26 @@
+TaskTracker:
+
+Goal: User inputs a task that needs to be completed by a certain date.  Program determines which task that it stores is the most pressing and reports that as the task to complete next.  Remarks about program:
+
+1. User can classify several tasks under one parent task.  For example, the parent task could be "CSC Final Project" which could have sub-tasks such as "find partner", "make outline", "complete first draft", etc.  Each sub-task could also have sub-tasks of its own, meaning each assignment has a tree-like data structure.  Each parent node has the due date of its latest child node.
+
+2. A node does not get removed from the data structure upon completion.  Instead, as long as a node's parent node is still marked as incomplete, each node will remain in the data structure.  Thus, each tree node needs a 'complete' flag.
+
+3. Each parent node needs to keep two dates: the date in which the node itself is due, and the date at which the earliest child node is due.
+
+4. Each node must be serializable.  The data structure will be written to a file when the program closes.
+
+5. The due date for each assignment has a year, month, day, hour, and minute field.
+
+6. The algorithm for selecting an assignment is as follows:
+	a) Scan all parent nodes and find the one whose has a child with the earliest due date.
+	b) If multiple nodes have the same earliest due date, return the node with the earliest parent due date.
+	c) If multiple parents have the same parent due date, choose the node with the most children.
+	d) If multiple parents have the same number of children, choose the one found first.
+
+7. Marking a node as complete works as follows:
+	a) User marks task as complete
+	b) Node traverses up to parent node
+	c) Parent node checks if all children have been marked as complete
+	d) If so, parent deletes all child nodes
+	e) Traverse up to parent and repeat
